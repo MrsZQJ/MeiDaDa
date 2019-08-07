@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/groupDetail/main",
+    "pages/paySuccess/main",
+    "pages/PersonalCenter/main",
+    "pages/pay/main",
+    "pages/groupList/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0086F8",
+    "navigationBarTitleText": "美哒哒",
+    "navigationBarTextStyle": "white"
+  }
+}

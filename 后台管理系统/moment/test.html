@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    ptgoodsName
+    ptPrice
+    ptSize
+    ptValidhours
+    startTime
+    endTime
+    ptgoodsNumber
+    content
+    ptgoodsImgs
+    sort
+    sale
+    ptTimes
+</body>
+<script>
+    ${baseUrl}
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        dataType: "JSON",
+        headers: {
+            'x-api-token': $.cookie('token')
+        },
+        url: "http://47.112.119.60:83/changepassword",
+        data: JSON.stringify(apt),
+        success: function (response) {
+            if (response.code == 200) {
+                layer.closeAll();
+                layer.msg(`账号为${$.cookie('username')}的密码修改成功!`);
+            }
+        }
+    });
+</script>
+
+</html>

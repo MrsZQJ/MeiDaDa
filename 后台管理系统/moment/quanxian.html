@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<script>
+    function getCookie() {
+        let Cookieaa = document.cookie.split(";");
+        for (var i = 0; i < Cookieaa.length; i++) {
+            var arr = Cookieaa[i].split("=");
+            if (arr[0] == " token") {
+                return arr[1]
+            }
+        }
+    }
+    const yanzheng = getCookie()
+    if (!yanzheng) {
+        location.href = "login.html";
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>美哒哒</title>
+    <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/layui/css/layui.css">
+    <link rel="stylesheet" href="./static/css/base.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- <div class="layui-logo">layui 后台布局</div> -->
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+
+                <li class="layui-nav-item"><a href="./quanxian.html"><i class="layui-icon layui-icon-release"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;权限管理</i> </a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" id="parentChangePassword"><a href="javascript:"><i
+                            class="layui-icon layui-icon-password" style="font-size: 14px; color: #ffffff;"
+                            id="changePassWorld">&nbsp;&nbsp;修改密码</i> </a></li>
+                <li class="layui-nav-item" id="getlayout"><a href="#"><i class="layui-icon layui-icon-username"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;退出</i> </a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item"><a href="./index.html">商户管理</a></li>
+                    <li class="layui-nav-item"><a href="./shoping.html">拼团产品管理</a></li>
+                    <li class="layui-nav-item"><a href="./tixian.html">提现管理</a></li>
+                    <li class="layui-nav-item"><a href="./user.html">用户管理</a></li>
+                    <li class="layui-nav-item layui-nav-itemed"><a href="./quanxian.html">权限管理</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <div class="top">
+                    <a href="javascript:;" class="addShangHu">+添加商户</a>
+                    <!-- <div class="box">
+                        <input type="text" id="q" placeholder="搜索手机号码">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </div> -->
+                    <a href="javascript:;" style="float: right;" class="addYongHu">+添加用户</a>
+                </div>
+                <table class="table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>管理组名称</th>
+                            <th>账号</th>
+                            <th>管理组别</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="moban">
+                        <tr>
+                            <th>1</th>
+                            <th>aa</th>
+                            <th>bbb</th>
+                            <th>bbb</th>
+                            <th>
+                                <a href="javascript:show();">权限</a>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:DetailTr();">删除</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>aa</th>
+                            <th>bbb</th>
+                            <th>bbb</th>
+                            <th>
+                                <a href="javascript:show();">权限</a>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:DetailTr();">删除</a>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="demoaaa"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./static/jquery-3.3.1.min.js"></script>
+<script src="./static/jquery.cookie.js"></script>
+<script src="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="./static/layui/layui.js"></script>
+<script src="./static/template-web.js"></script>
+<script src="./base.js"></script>
+<!-- 修改密码 -->
+<script type="text/html" id="changePassWorldbbb">
+    <form class="layui-form" id="changePassWorldaaa" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-block">
+                <input id="oldNum" type="text" name="old" autocomplete="off" placeholder="请输入旧密码" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input id="newNum" type="text" name="new" autocomplete="off" placeholder="请输入新密码" class="layui-input">
+            </div>
+        </div>
+
+    </form>
+</script>
+<!-- 权限管理 -->
+<script type="text/html" id="quanxianGuanLi">
+    <form class="layui-form" id="changeQuanXian" style="padding: 20px;">
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">原始复选框</label>
+            <div class="layui-input-block">
+                <input style="display:none;" type="checkbox" name="like1[write]" lay-skin="primary" title="写作">
+                <input style="display:none;" type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                <input style="display:none;" type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+            </div>
+        </div>
+    </form>
+</script>
+<!-- 模板生成表格 -->
+<script type="text/html" id="tab">
+    {{each list value}}
+    <tr>
+        <th>{{value.id}}</th>
+        <th>{{value.roleName}}</th>
+        <th>等待</th>
+        <th>{{if value.roleType==0}}非运营人员{{else}}运营人员{{/if}}</th>
+        </th>
+        <th>
+            <a href="javascript:show({{value}});">权限</a>&nbsp;&nbsp;&nbsp;
+            <a href="javascript:DetailTr({{value.id}});">删除</a>
+        </th>
+    </tr>
+    {{/each}}
+</script>
+<!-- 添加角色 -->
+<script type="text/html" id="addShangHuXingXi" lay-filter="example">
+    <form class="layui-form" id="addShangHuXingXiInput" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="roleName" autocomplete="off" placeholder="请输入角色名称"
+                    class="layui-input roleName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色类型</label>
+            <div class="layui-input-block">
+                <!-- <input type="text" name="roleType" autocomplete="off" placeholder="请输入角色类型" class="layui-input roleType"> -->
+                <select name="roleType" style="display:none" class="status roleType">
+                    <option value="0">非运营人员</option>
+                    <option value="1">运营人员</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拥有菜单Id</label>
+            <div class="layui-input-block">
+                <input type="text" name="menuIds" autocomplete="off" placeholder="点击选择角色权限" class="layui-input menuIds">
+            </div>
+        </div>
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">原始复选框</label>
+            <div class="layui-input-block">
+                <input style="display:none;" type="checkbox" name="like1[write]" lay-skin="primary" title="写作">
+                <input style="display:none;" type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                <input style="display:none;" type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+            </div>
+        </div>
+    </form>
+</script>
+<!-- 添加用户 -->
+<script type="text/html" id="addYongHu" lay-filter="example">
+    <form class="layui-form" id="addShangHuXingXiInput" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" autocomplete="off" placeholder="请输入用户账号"
+                    class="layui-input username">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="password" autocomplete="off" placeholder="请输入用户密码"
+                    class="layui-input password">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <select name="sex" style="display:none" class="sex">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" autocomplete="off" placeholder="请输入邮箱" class="layui-input email">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="status" style="display:none" class="status">
+                    <option value="1">启用</option>
+                    <option value="2">停用</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</script>
+<script>
+    layui.use(['layer', 'laypage', 'form', 'element'], function () {
+        window.layer = layui.layer;
+        window.form = layui.form;
+        window.element = layui.element;
+        window.laypage = layui.laypage;
+        mounted()
+    });
+
+
+    function mounted() {
+        // 查询商户信息
+        fund(1)
+        // 修改密码
+        $('#changePassWorld').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '修改密码',
+                area: ['50%', '70%'],
+                content: $('#changePassWorldbbb').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                },
+                yes: function (index, layero) {
+                    // 打印提交的修改密码表单信息
+                    var apt = {
+                        app: $.cookie('username'),
+                        oldPassword: $('#oldNum').val(),
+                        password: $('#newNum').val(),
+                        confirmPassword: $('#newNum').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        dataType: "JSON",
+                        headers: {
+                            'x-api-token': $.cookie('token')
+                        },
+                        url: `${baseUrl}/changepassword`,
+                        data: JSON.stringify(apt),
+                        success: function (response) {
+                            if (response.code == 200) {
+                                layer.closeAll();
+                                layer.msg(`账号为${$.cookie('username')}的密码修改成功!`);
+                            } else {
+                                layer.msg(response.msg);
+                            }
+                        }
+                    });
+                },
+            });
+        })
+        // 退出登录
+        $('#getlayout').on('click', function () {
+            $.ajax({
+                type: "get",
+                contentType: "application/json",
+                dataType: "JSON",
+                headers: {
+                    'x-api-token': $.cookie('token')
+                },
+                url: `${baseUrl}/logout`,
+                success: function (response) {
+                    console.log(response);
+                    if (response.code == 200) {
+                        $.removeCookie("token")
+                        location.href = "login.html";
+                    }
+                }
+            });
+        })
+        // 添加角色
+        $('.addShangHu').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '添加角色',
+                area: ['70%', '80%'],
+                content: $('#addShangHuXingXi').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                    $('.menuIds').focus(function () {
+                        // menuIds()
+                    })
+                },
+                yes: function (index, layero) {
+                    var fm = {
+                        roleName: $('.roleName').val(),
+                        roleType: $('.roleType').val(),
+                        menuIds: [
+                            1, 2, 3
+                        ]
+                    }
+                    tianJia(fm)
+                },
+            });
+        })
+
+        // 添加用户
+        $('.addYongHu').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '添加用户',
+                area: ['70%', '80%'],
+                content: $('#addYongHu').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                },
+                yes: function (index, layero) {
+                    var fm = {
+                        username: $('.username').val(),
+                        password: $('.password').val(),
+                        sex: $('.sex').val(),
+                        email: $('.email').val(),
+                        status: $('.status').val(),
+                    }
+                    $.ajax({
+                        type: "post",
+                        url: `${baseUrl}/user`,
+                        data: JSON.stringify(fm),
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        headers: {
+                            'x-api-token': $.cookie('token')
+                        },
+                        success: function (response) {
+                            if (response.code == 200) {
+                                layer.closeAll();
+                                layer.msg('添加用户成功!');
+                                fund(1)
+                            } else {
+                                layer.msg(response.msg);
+                            }
+                        }
+                    });
+                },
+            });
+        })
+    }
+    // 请求表格数据
+    var current = NaN
+    // 查询角色信息
+    function fund(pageIndex) {
+        var one = {
+            pageIndex: pageIndex,
+            pageSize: 10,
+        }
+        $.ajax({
+            type: "post",
+            url: `${baseUrl}/role/search`,
+            data: JSON.stringify(one),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            success: function (response) {
+                if (response.code == 200) {
+                    var html = template('tab', {
+                        list: response.data.items
+                    });
+                    $('.moban').html(html);
+                    // 复选框初始化
+                    laypage.render({
+                        elem: 'demoaaa',
+                        limit: 10,
+                        curr: current,
+                        count: response.data.total,
+                        jump: function (obj, first) {
+                            if (!first) {
+                                current = obj.curr
+                                fund(obj.curr)
+                            }
+                        }
+                    });
+                } else {
+                    layer.msg(response.msg)
+                }
+            }
+        });
+    }
+    // 添加商户
+    function tianJia(fm) {
+        $.ajax({
+            type: "post",
+            url: `${baseUrl}/role`,
+            data: JSON.stringify(fm),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            success: function (response) {
+                if (response.code == 200) {
+                    layer.closeAll();
+                    layer.msg('添加角色成功!');
+                    fund(1)
+                } else {
+                    layer.msg(response.msg);
+                }
+            }
+        });
+    }
+    // 删除权限
+    function DetailTr(id) {
+        layer.open({
+            type: 1,
+            content: '<p style="text-align: center">点击确认删除</p>',
+            btn: ['确定', '取消'],
+            success: function (index, layero) {},
+            yes: function (index, layero) {
+                $.ajax({
+                    type: "DELETE",
+                    contentType: "application/json",
+                    dataType: "JSON",
+                    headers: {
+                        'x-api-token': $.cookie('token')
+                    },
+                    url: `${baseUrl}/role/${id}`,
+                    success: function (response) {
+                        if (response.code == 200) {
+                            layer.closeAll();
+                            layer.msg(`序号为 ${id} 的权限删除成功!`);
+                            fund(1)
+                        }
+                    }
+                });
+            },
+        });
+    }
+    // 权限编辑
+    function show(value) {
+        layer.open({
+            type: 1,
+            title: "权限管理",
+            area: ['70%', '80%'],
+            content: $('#addShangHuXingXi').html(),
+            btn: ['确定', '取消'],
+            success: function (index, layero) {
+                form.render();
+                $.ajax({
+                    type: "GET",
+                    url: `${baseUrl}/role/${value.id}`,
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    headers: {
+                        'x-api-token': $.cookie('token')
+                    },
+                    success: function (response) {
+                        if (response.code == 200) {
+                            console.log(response);
+                            $('.roleName').val(response.data.roleName)
+                            $('.roleType').val(response.data.roleType)
+                        } else {
+                            layer.msg(response.msg)
+                        }
+                    }
+                });
+            },
+            yes: function (index, layero) {
+                // layer.closeAll();
+                var one = {
+                    roleName: $('.roleName').val(),
+                    roleType: $('.roleType').val(),
+                    menuIds: [
+                        0, 1, 2, 3, 4, , 5
+                    ]
+                }
+                $.ajax({
+                    type: "PUT",
+                    url: `${baseUrl}/role/${value.id}`,
+                    data: JSON.stringify(one),
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    headers: {
+                        'x-api-token': $.cookie('token')
+                    },
+                    success: function (response) {
+                        if (response.code == 200) {
+                            layer.closeAll();
+                            layer.msg(`权限修改成功!`);
+                            fund(1)
+                        } else {
+                            layer.msg(response.msg)
+                        }
+                    }
+                });
+            },
+        });
+    }
+    // 显示权限选择
+    function menuIds() {
+        layer.open({
+            type: 1,
+            title: '新增权限',
+            area: ['50%', '60%'],
+            content: $('#quanxianGuanLi').html(),
+            btn: ['确定', '取消'],
+            success: function (index, layero) {
+                form.render();
+            },
+            yes: function (index, layero) {
+
+            },
+        });
+    }
+</script>
+
+</html>

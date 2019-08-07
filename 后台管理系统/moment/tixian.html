@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<script>
+    function getCookie() {
+        let Cookieaa = document.cookie.split(";");
+        for (var i = 0; i < Cookieaa.length; i++) {
+            var arr = Cookieaa[i].split("=");
+            if (arr[0] == " token") {
+                return arr[1]
+            }
+        }
+    }
+    const yanzheng = getCookie()
+    if (!yanzheng) {
+        location.href = "login.html";
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>美哒哒</title>
+    <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/layui/css/layui.css">
+    <link rel="stylesheet" href="./static/css/base.css">
+    <style>
+        .changed {
+            width: 150px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <ul class="layui-nav layui-layout-left">
+
+                <li class="layui-nav-item"><a href="./quanxian.html"><i class="layui-icon layui-icon-release"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;权限管理</i> </a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" id="parentChangePassword"><a href="javascript:"><i
+                            class="layui-icon layui-icon-password" style="font-size: 14px; color: #ffffff;"
+                            id="changePassWorld">&nbsp;&nbsp;修改密码</i> </a></li>
+                <li class="layui-nav-item" id="getlayout"><a href="#"><i class="layui-icon layui-icon-username"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;退出</i> </a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item"><a href="./index.html">商户管理</a></li>
+                    <li class="layui-nav-item"><a href="./shoping.html">拼团产品管理</a></li>
+                    <li class="layui-nav-item layui-nav-itemed"><a href="./tixian.html">提现管理</a></li>
+                    <li class="layui-nav-item"><a href="./user.html">用户管理</a></li>
+                    <li class="layui-nav-item"><a href="./quanxian.html">权限管理</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <div class="top">
+                    <!-- <a href="javascript:;" class="addShangHu">+申请提现</a> -->
+                    <select class="changed" id="mySelect">
+                        <option selected value="0">全部</option>
+                        <option value="1">已处理</option>
+                        <option value="2">未处理</option>
+                    </select>
+                    <div class="box">
+                        <input type="text" id="searchPhone" placeholder="搜索商户名称">
+                        <i id="searchIcon" class="layui-icon layui-icon-search"></i>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="daichuli" class="tab-pane active"><br>
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>商户名称</th>
+                                    <th>账号</th>
+                                    <th>订单号</th>
+                                    <th>金额</th>
+                                    <th>创建时间</th>
+                                    <th>提现详情</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="moban1">
+                                <!-- <tr>
+                                    <th>1</th>
+                                    <th>aa</th>
+                                    <th>bbb</th>
+                                    <th>cccc</th>
+                                    <th>ddddd</th>
+                                    <th>2019.7.13</th>
+                                    <th><a href="javascript:tixianTr();" style="color: #1665D8">提现详情</a></th>
+                                    <th>
+                                        <a href="javascript:">通过</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="javascript:;">不通过</a>
+                                    </th>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <div id="demoaaa1"></div>
+                    </div>
+                    <div id="yichuli" class="tab-pane fade"><br>
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>商户名称</th>
+                                    <th>账号</th>
+                                    <th>订单号</th>
+                                    <th>金额</th>
+                                    <th>创建时间</th>
+                                    <th>提现详情</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="moban2">
+                                <!-- <tr>
+                                    <th>1</th>
+                                    <th>aa</th>
+                                    <th>bbb</th>
+                                    <th>cccc</th>
+                                    <th>ddddd</th>
+                                    <th>2019.7.13</th>
+                                    <th><a href="javascript:tixianTr();" style="color: #1665D8">提现详情</a></th>
+                                    <th>
+                                        <a href="javascript:">通过</a>
+                                    </th>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <div id="demoaaa2"></div>
+                    </div>
+                    <div id="weichuli" class="tab-pane fade"><br>
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>商户名称</th>
+                                    <th>账号</th>
+                                    <th>订单号</th>
+                                    <th>金额</th>
+                                    <th>创建时间</th>
+                                    <th>提现详情</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="moban3">
+                                <!-- <tr>
+                                    <th>1</th>
+                                    <th>aa</th>
+                                    <th>bbb</th>
+                                    <th>cccc</th>
+                                    <th>ddddd</th>
+                                    <th>2019.7.13</th>
+                                    <th><a href="javascript:tixianTr();" style="color: #1665D8">提现详情</a></th>
+                                    <th>
+                                        <a href="javascript:">通过</a>
+                                    </th>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <div id="demoaaa3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="./static/jquery-3.3.1.min.js"></script>
+<script src="./static/jquery.cookie.js"></script>
+<script src="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="./static/layui/layui.js"></script>
+<script src="./static/template-web.js"></script>
+<script src="./base.js"></script>
+<!-- 修改密码 -->
+<script type="text/html" id="changePassWorldbbb">
+    <form class="layui-form" id="changePassWorldaaa" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-block">
+                <input id="oldNum" type="text" name="old" autocomplete="off" placeholder="请输入旧密码" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input id="newNum" type="text" name="new" autocomplete="off" placeholder="请输入新密码" class="layui-input">
+            </div>
+        </div>
+
+    </form>
+</script>
+<!-- 添加商户/编辑单个商户 -->
+<script type="text/html" id="addShangHuXingXi" lay-filter="example">
+    <form class="layui-form" id="addShangHuXingXiInput" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">会员Id</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerId" autocomplete="off" placeholder="请输入会员Id"
+                    class="layui-input customerId">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">帐号</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerName" autocomplete="off" placeholder="请输入帐号"
+                    class="layui-input customerName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请金额</label>
+            <div class="layui-input-block">
+                <input type="text" name="amount" autocomplete="off" placeholder="请输入申请金额" class="layui-input amount">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">实际金额</label>
+            <div class="layui-input-block">
+                <input type="text" name="actualMoney" autocomplete="off" placeholder="请输入实际金额"
+                    class="layui-input actualMoney">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提现银行卡</label>
+            <div class="layui-input-block">
+                <input type="text" name="applyCard" autocomplete="off" placeholder="请输入提现银行卡"
+                    class="layui-input applyCard">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="remark" autocomplete="off" placeholder="请输入备注" class="layui-input remark">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否默认</label>
+            <div class="layui-input-block">
+                <select name="status" style="display:none" class="status">
+                    <option value="0">审核中</option>
+                    <option value="1">通过</option>
+                    <option value="2">不通过</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="applyTime" class="layui-input applyTime" id="test1" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createTime" class="layui-input createTime" id="test2" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">修改时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="modifyTime" class="layui-input modifyTime" id="test3" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+    </form>
+</script>
+<!-- 模板生成表格 -->
+<script type="text/html" id="tab">
+    {{each list value}}
+    <tr>
+        <th>{{value.customerId}}</th>
+        <th>{{value.customerNickname}}</th>
+        <th>{{value.customerName}}</th>
+        <th>{{value.cashApplyId}}</th>
+        <th>{{value.amount}}</th>
+        <th>{{value.createTime}}</th>
+        </th>
+        <th><a href="javascript:tixianTr({{value}});" style="color: #1665D8">提现详情</a></th>
+        <th>
+            {{if value.status==0}}
+            <a href="javascript:pass({{value.customerId}});">通过</a>&nbsp;&nbsp;&nbsp;
+            <a href="javascript:noPass({{value.customerId}});;">不通过</a>
+            {{else if value.status==1}}
+            <a href="javascript:pass({{value.customerId}});">通过</a>&nbsp;&nbsp;&nbsp;
+            {{else if value.status==2}}
+            <a href="javascript:noPass({{value.customerId}});;">不通过</a>
+            {{/if}}
+        </th>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/html" id="tixian">
+    <table class="table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>店名</th>
+                <th>账号</th>
+                <th>银行卡</th>
+                <th>提现金额</th>
+                <th>提现时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <th>aa</th>
+                <th>bbb</th>
+                <th>cccc</th>
+                <th>ddddd</th>
+                <th>2019.7.13</th>
+            </tr>
+        </tbody>
+    </table>
+</script>
+<script>
+    layui.use(['layer', 'laydate', 'laypage', 'form', 'element'], function () {
+        window.layer = layui.layer;
+        window.form = layui.form;
+        window.element = layui.element;
+        window.laypage = layui.laypage;
+        window.laydate = layui.laydate
+        mounted()
+    });
+    // 请求表格数据
+    var current = NaN
+
+    function fund(pageIndex) {
+        var one = {
+            pageIndex: pageIndex,
+            pageSize: 10,
+            status: $('#mySelect').val(),
+            keyword: $('#searchPhone').val(),
+        }
+        $.ajax({
+            type: "post",
+            url: `${baseUrl}/withdraw/search`,
+            data: JSON.stringify(one),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            success: function (response) {
+                if (response.code == 200) {
+                    console.log($('#mySelect').val());
+
+                    if ($('#mySelect').val() == '0') {
+                        $.each(response.data.items, function (indexInArray, valueOfElement) {
+                            valueOfElement.applyTime = new Date(valueOfElement.applyTime)
+                                .toISOString()
+                                .split('T')[0]
+                            valueOfElement.createTime = new Date(valueOfElement.createTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.modifyTime = new Date(valueOfElement.modifyTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.num = 0
+                        });
+                        var html = template('tab', {
+                            list: response.data.items
+                        });
+                        $('.moban1').html(html)
+
+                        laypage.render({
+                            elem: 'demoaaa1',
+                            limit: 10,
+                            curr: current,
+                            count: response.data.total,
+                            jump: function (obj, first) {
+                                if (!first) {
+                                    current = obj.curr
+                                    fund(obj.curr)
+                                }
+                            }
+                        });
+                    } else if ($('#mySelect').val() == '1') {
+                        $.each(response.data.items, function (indexInArray, valueOfElement) {
+                            valueOfElement.applyTime = new Date(valueOfElement.applyTime)
+                                .toISOString()
+                                .split('T')[0]
+                            valueOfElement.createTime = new Date(valueOfElement.createTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.modifyTime = new Date(valueOfElement.modifyTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.num = 1
+                        });
+                        var html = template('tab', {
+                            list: response.data.items
+                        });
+                        $('.moban2').html(html + '')
+
+                        laypage.render({
+                            elem: 'demoaaa2',
+                            limit: 10,
+                            curr: current,
+                            count: response.data.total,
+                            jump: function (obj, first) {
+                                if (!first) {
+                                    current = obj.curr
+                                    fund(obj.curr)
+                                }
+                            }
+                        });
+                    } else if ($('#mySelect').val() == '2') {
+                        $.each(response.data.items, function (indexInArray, valueOfElement) {
+                            valueOfElement.applyTime = new Date(valueOfElement.applyTime)
+                                .toISOString()
+                                .split('T')[0]
+                            valueOfElement.createTime = new Date(valueOfElement.createTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.modifyTime = new Date(valueOfElement.modifyTime)
+                                .toISOString().split('T')[0]
+                            valueOfElement.num = 2
+                        });
+                        var html = template('tab', {
+                            list: response.data.items
+                        });
+                        $('.moban3').html(html)
+
+                        laypage.render({
+                            elem: 'demoaaa3',
+                            limit: 10,
+                            curr: current,
+                            count: response.data.total,
+                            jump: function (obj, first) {
+                                if (!first) {
+                                    current = obj.curr
+                                    fund(obj.curr)
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function mounted() {
+        // 查询商户信息
+        fund(1)
+        // 修改密码
+        $('#changePassWorld').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '修改密码',
+                area: ['50%', '70%'],
+                content: $('#changePassWorldbbb').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                },
+                yes: function (index, layero) {
+                    // 打印提交的修改密码表单信息
+                    var apt = {
+                        app: $.cookie('username'),
+                        oldPassword: $('#oldNum').val(),
+                        password: $('#newNum').val(),
+                        confirmPassword: $('#newNum').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        dataType: "JSON",
+                        headers: {
+                            'x-api-token': $.cookie('token')
+                        },
+                        url: `${baseUrl}/changepassword`,
+                        data: JSON.stringify(apt),
+                        success: function (response) {
+                            if (response.code == 200) {
+                                layer.closeAll();
+                                layer.msg(`账号为${$.cookie('username')}的密码修改成功!`);
+                            } else {
+                                layer.msg(response.msg);
+                            }
+                        }
+                    });
+                },
+            });
+        })
+        // 退出登录
+        $('#getlayout').on('click', function () {
+            $.ajax({
+                type: "get",
+                contentType: "application/json",
+                dataType: "JSON",
+                headers: {
+                    'x-api-token': $.cookie('token')
+                },
+                url: `${baseUrl}/logout`,
+                success: function (response) {
+                    if (response.code == 200) {
+                        $.removeCookie("token")
+                        location.href = "login.html";
+                    }
+                }
+            });
+        })
+    }
+
+    function tixianTr(id) {
+        console.log(111111);
+
+        console.log(id.customerId);
+        $.ajax({
+            type: "get",
+            contentType: "application/json",
+            dataType: "JSON",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            url: `${baseUrl}/withdraw/${id.customerId}`,
+            success: function (response) {
+                console.log(3456789);
+
+                console.log(response);
+
+            }
+        });
+        console.log(111111);
+        layer.open({
+            type: 1,
+            title: false,
+            area: ['50%', '60%'],
+            content: $('#tixian').html(),
+        });
+    }
+
+    function pass(id) {
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            dataType: "JSON",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            url: `${baseUrl}/withdraw/${id}`,
+            data: JSON.stringify({
+                status: 1
+            }),
+            success: function (response) {
+                if (response.code == 200) {
+                    layer.closeAll();
+                    layer.msg(`该申请已经通过!`);
+                } else {
+                    layer.msg(response.msg);
+                }
+            }
+        });
+    }
+
+    function noPass(id) {
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            dataType: "JSON",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            url: `${baseUrl}/withdraw/${id}`,
+            data: JSON.stringify({
+                status: 2
+            }),
+            success: function (response) {
+                if (response.code == 200) {
+                    layer.closeAll();
+                    layer.msg(`该申请不通过!`);
+                } else {
+                    layer.msg(response.msg);
+                }
+            }
+        });
+    }
+
+
+    // 下拉菜单值改变切换页面内容
+    $('#mySelect').change(function () {
+        const ids = $('#mySelect').val()
+        $('.tab-pane').removeClass('active')
+        $('.tab-pane').addClass('fade')
+        $('.tab-pane').eq(ids).removeClass('fade')
+        $('.tab-pane').eq(ids).addClass('active')
+        fund(1)
+    })
+
+
+    // 键盘回车按下事件
+    $('#searchPhone').on('keyup', function (e) {
+        if (event.keyCode == '13') {
+            fund(1)
+        }
+    })
+
+    //点击搜索图标事件
+    $('#searchIcon').click(function () {
+        fund(1)
+    })
+
+    // 输入框失去焦点事件
+    $('#searchPhone').blur(function () {
+        fund(1)
+    })
+</script>
+
+</html>

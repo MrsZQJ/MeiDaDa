@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<script>
+    function getCookie() {
+        let Cookieaa = document.cookie.split(";");
+        for (var i = 0; i < Cookieaa.length; i++) {
+            var arr = Cookieaa[i].split("=");
+            if (arr[0] == " token") {
+                return arr[1]
+            }
+        }
+    }
+    const yanzheng = getCookie()
+    if (!yanzheng) {
+        location.href = "login.html";
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>美哒哒</title>
+    <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/layui/css/layui.css">
+    <link rel="stylesheet" href="./static/css/base.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <ul class="layui-nav layui-layout-left">
+
+                <li class="layui-nav-item"><a href="./quanxian.html"><i class="layui-icon layui-icon-release"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;权限管理</i> </a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" id="parentChangePassword"><a href="javascript:"><i
+                            class="layui-icon layui-icon-password" style="font-size: 14px; color: #ffffff;"
+                            id="changePassWorld">&nbsp;&nbsp;修改密码</i> </a></li>
+                <li class="layui-nav-item" id="getlayout"><a href="#"><i class="layui-icon layui-icon-username"
+                            style="font-size: 14px; color: #ffffff;">&nbsp;&nbsp;退出</i> </a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item"><a href="./index.html">商户管理</a></li>
+                    <li class="layui-nav-item layui-nav-itemed"><a href="./shoping.html">拼团产品管理</a></li>
+                    <li class="layui-nav-item"><a href="./tixian.html">提现管理</a></li>
+                    <li class="layui-nav-item"><a href="./user.html">用户管理</a></li>
+                    <li class="layui-nav-item"><a href="./quanxian.html">权限管理</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <div style="padding: 15px;">
+                <div class="top">
+                    <a href="javascript:;" class="addShangHu">+添加商品</a>
+                    <div class="box">
+                        <input type="text" id="searchPhone" placeholder="搜索手机号码">
+                        <i id="searchIcon" class="layui-icon layui-icon-search"></i>
+                    </div>
+                </div>
+                <table class="table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>创建时间</th>
+                            <th>活动名称</th>
+                            <th>账号</th>
+                            <th>拼团记录</th>
+                            <th>单号</th>
+                            <!-- <th>核销码</th> -->
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="moban">
+                        <tr>
+                            <th>1</th>
+                            <th>aa</th>
+                            <th>bbb</th>
+                            <th><a href="javascript:tixianTr();" style="color: #1665D8">拼团详情</a></th>
+                            <th>ggggggggg</th>
+                            <th>3242354</th>
+                            <th>
+                                <a href="javascript:edit();">编辑</a>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:;">停用</a>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:DetailTr();;">删除</a>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="demoaaa"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="./static/jquery-3.3.1.min.js"></script>
+<script src="./static/jquery.cookie.js"></script>
+<script src="./static/bootstrap-4.3.1-dist/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="./static/layui/layui.js"></script>
+<script src="./static/template-web.js"></script>
+<script src="./base.js"></script>
+<!-- 修改密码 -->
+<script type="text/html" id="changePassWorldbbb">
+    <form class="layui-form" id="changePassWorldaaa" style="padding: 20px;" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-block">
+                <input id="oldNum" type="text" name="old" autocomplete="off" placeholder="请输入旧密码" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input id="newNum" type="text" name="new" autocomplete="off" placeholder="请输入新密码" class="layui-input">
+            </div>
+        </div>
+
+    </form>
+</script>
+<!-- 添加商品信息 -->
+<script type="text/html" id="addShangHuXingXi">
+    <form class="layui-form" id="addShangHuXingXiInput" style="padding: 20px;" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团商品名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptgoodsName" autocomplete="off" placeholder="请输入拼团商品名称"
+                    class="layui-input ptgoodsName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团价格</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptPrice" autocomplete="off" placeholder="请输入拼团价格" class="layui-input ptPrice">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团人数</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptSize" autocomplete="off" placeholder="请输入拼团人数" class="layui-input ptSize">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团有效期</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptValidhours" autocomplete="off" placeholder="请输入拼团有效期"
+                    class="layui-input ptValidhours">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团开始时间</label>
+            <div class="layui-input-block">
+                <!-- <input type="text" name="startTime" autocomplete="off" placeholder="请输入拼团开始时间" class="layui-input"> -->
+                <input type="text" name="startTime" class="layui-input birthday startTime" id="asdOne"
+                    placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团结束时间</label>
+            <div class="layui-input-block">
+                <!-- <input type="text" name="endTime" autocomplete="off" placeholder="请输入拼团结束时间" class="layui-input"> -->
+                <input type="text" name="endTime" class="layui-input birthday endTime" id="asdTwo"
+                    placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品库存数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptgoodsNumber" autocomplete="off" placeholder="请输入商品库存数量"
+                    class="layui-input ptgoodsNumber">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="content" autocomplete="off" placeholder="请输入商品描述" class="layui-input content">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品详情</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptgoodsImgs" autocomplete="off" placeholder="请输入商品详情"
+                    class="layui-input ptgoodsImgs">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input type="text" name="sort" autocomplete="off" placeholder="请输入排序" class="layui-input sort">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">销售</label>
+            <div class="layui-input-block">
+                <!-- <input type="text" name="sale" autocomplete="off" placeholder="请输入销售" class="layui-input"> -->
+                <select name="sale" style="display:none" class="sale">
+                    <option value="0">是</option>
+                    <option value="1">否</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拼团次数</label>
+            <div class="layui-input-block">
+                <input type="text" name="ptTimes" autocomplete="off" placeholder="请输入拼团次数" class="layui-input ptTimes">
+            </div>
+        </div>
+    </form>
+</script>
+<!-- 提现详情 -->
+<script type="text/html" id="tixian">
+    <table class="table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>电话号码</th>
+                <th>状态</th>
+                <th>到店情况</th>
+                <th>核销码</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <th>aa</th>
+                <th>bbb</th>
+                <th>cccc</th>
+                <th>ddddd</th>
+            </tr>
+        </tbody>
+    </table>
+</script>
+<!-- 模板渲染 -->
+<script type="text/html" id="tab">
+    {{each list value}}
+    <tr>
+        <th>{{value.ptgoodsId}}</th>
+        <th>{{value.startTime}}</th>
+        <th>{{value.ptgoodsName}}</th>
+        <th>{{value.customerName}}</th>
+        <th><a href="javascript:tixianTr({{value.ptgoodsId}});" style="color: #1665D8">拼团详情</a></th>
+        <th>{{each value.orderIds val}} {{val }}&nbsp; &nbsp; {{/each}}</th>
+        <th>
+            <a href="javascript:edit({{value}});">编辑</a>&nbsp;&nbsp;&nbsp;
+            <!-- <a href="javascript:changeStatu({{value}});">停用</a>&nbsp;&nbsp;&nbsp; -->
+            <a href="javascript:DetailTr({{value.ptgoodsId}});;">删除</a>
+        </th>
+    </tr>
+    {{/each}}
+</script>
+<script>
+    layui.use(['layer', 'laypage', 'form', 'laydate', 'element'], function () {
+        window.layer = layui.layer;
+        window.form = layui.form;
+        window.element = layui.element;
+        window.laydate = layui.laydate;
+        window.laypage = layui.laypage
+        mounted()
+    });
+    // 请求表格数据
+    var current = NaN
+    // 查询商户信息
+    function fund(pageIndex) {
+        var one = {
+            pageIndex: pageIndex,
+            pageSize: 10,
+            keyword: $('#searchPhone').val(),
+        }
+        $.ajax({
+            type: "post",
+            url: `${baseUrl}/goods/search`,
+            data: JSON.stringify(one),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            success: function (response) {
+                // $.each(response.data.items, function (indexInArray, valueOfElement) { 
+                //     valueOfElement.orderIds=[35246546,235454565,132324123513,51451235123,1325132132]
+                // });
+                // console.log(response);
+
+                if (response.code == 200) {
+                    $.each(response.data.items, function (indexInArray, valueOfElement) {
+                        valueOfElement.endTime = new Date(valueOfElement.endTime)
+                            .toLocaleDateString()
+                        valueOfElement.startTime = new Date(valueOfElement.startTime)
+                            .toLocaleDateString()
+                    });
+                    var html = template('tab', {
+                        list: response.data.items
+                    });
+                    $('.moban').html(html);
+                    laypage.render({
+                        elem: 'demoaaa',
+                        limit: 10,
+                        curr: current,
+                        count: response.data.total,
+                        jump: function (obj, first) {
+                            if (!first) {
+                                current = obj.curr
+                                fund(obj.curr)
+                            }
+                        }
+
+                    });
+                } else {
+                    layer.msg(response.msg)
+                }
+            }
+        });
+    }
+
+    function mounted() {
+        // 查询商户信息
+        fund(1)
+        // 修改密码
+        $('#changePassWorld').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '修改密码',
+                area: ['50%', '70%'],
+                content: $('#changePassWorldbbb').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                },
+                yes: function (index, layero) {
+                    // 打印提交的修改密码表单信息
+                    var apt = {
+                        app: $.cookie('username'),
+                        oldPassword: $('#oldNum').val(),
+                        password: $('#newNum').val(),
+                        confirmPassword: $('#newNum').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        dataType: "JSON",
+                        headers: {
+                            'x-api-token': $.cookie('token')
+                        },
+                        url: `${baseUrl}/changepassword`,
+                        data: JSON.stringify(apt),
+                        success: function (response) {
+                            if (response.code == 200) {
+                                layer.closeAll();
+                                layer.msg(`账号为${$.cookie('username')}的密码修改成功!`);
+                            } else {
+                                layer.msg(response.msg);
+                            }
+                        }
+                    });
+                },
+            });
+        })
+        // 退出登录
+        $('#getlayout').on('click', function () {
+            $.ajax({
+                type: "get",
+                contentType: "application/json",
+                dataType: "JSON",
+                headers: {
+                    'x-api-token': $.cookie('token')
+                },
+                url: `${baseUrl}/logout`,
+                success: function (response) {
+                    console.log(response);
+                    if (response.code == 200) {
+                        $.removeCookie("token")
+                        location.href = "login.html";
+                    }
+                }
+            });
+        })
+        // 添加商品
+        $('.addShangHu').on('click', function () {
+            layer.open({
+                type: 1,
+                title: '添加商品',
+                area: ['50%', '60%'],
+                content: $('#addShangHuXingXi').html(),
+                btn: ['确定', '取消'],
+                success: function (index, layero) {
+                    form.render();
+                    // 初始化时间
+                    laydate.render({
+                        elem: '#asdOne',
+                        value: new Date()
+                    });
+                    laydate.render({
+                        elem: '#asdTwo',
+                        value: new Date()
+                    });
+                },
+                yes: function (index, layero) {
+                    var fm = {
+                        ptgoodsId: parseInt($('.ptgoodsId').val()),
+                        ptgoodsName: $('.ptgoodsName').val(),
+                        ptPrice: $('.ptPrice').val(),
+                        ptSize: parseInt($('.ptSize').val()),
+                        ptValidhours: $('.ptValidhours').val(),
+                        startTime: $('.startTime').val(),
+                        endTime: $('.endTime').val(),
+                        ptgoodsNumber: parseInt($('.ptgoodsNumber').val()),
+                        content: $('.content').val(),
+                        ptgoodsImgs: $('.ptgoodsImgs').val(),
+                        sort: parseInt($('.sort').val()),
+                        sale: $('.sale').val(),
+                        ptTimes: parseInt($('.ptTimes').val())
+                    }
+                    tianJia(fm)
+                },
+            });
+        })
+    }
+    // 添加商品
+    function tianJia(fm) {
+        $.ajax({
+            type: "post",
+            url: `${baseUrl}/goods`,
+            data: JSON.stringify(fm),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            success: function (response) {
+                if (response.code == 200) {
+                    layer.closeAll();
+                    layer.msg('添加商品成功!');
+                    fund(1)
+                } else {
+                    layer.msg(response.msg);
+                }
+            }
+        });
+    }
+
+    // 删除操作
+    function DetailTr(id) {
+        layer.open({
+            type: 1,
+            content: '<p style="text-align: center">点击确认删除</p>',
+            btn: ['确定', '取消'],
+            success: function (index, layero) {
+
+            },
+            yes: function (index, layero) {
+                $.ajax({
+                    type: "DELETE",
+                    contentType: "application/json",
+                    dataType: "JSON",
+                    headers: {
+                        'x-api-token': $.cookie('token')
+                    },
+                    url: `${baseUrl}/goods/${id}`,
+                    success: function (response) {
+                        if (response.code == 200) {
+                            layer.closeAll();
+                            layer.msg(`删除成功!`);
+                            fund(1)
+                        }
+                    }
+                });
+            },
+        });
+    }
+    // 提现详情
+    function tixianTr(id) {
+        $.ajax({
+            type: "get",
+            headers: {
+                'x-api-token': $.cookie('token')
+            },
+            url: `${baseUrl}/goods/${id}`,
+            dataType: "json",
+            success: function (response) {
+
+                layer.open({
+                    type: 1,
+                    title: false,
+                    area: ['50%', '60%'],
+                    content: $('#tixian').html(),
+                });
+            }
+        });
+    }
+    // 编辑操作
+    function edit(val) {
+        layer.open({
+            type: 1,
+            area: ['50%', '60%'],
+            content: $('#addShangHuXingXi').html(),
+            btn: ['确定', '取消'],
+            success: function (layero, index) {
+                form.render();
+                // 初始化时间
+                laydate.render({
+                    elem: '#asdOne',
+                    type: 'date',
+                    value: new Date()
+                });
+                laydate.render({
+                    elem: '#asdTwo',
+                    type: 'date',
+                    value: new Date()
+                });
+                val.startTime = new Date(val.startTime).toISOString().split('T')[0]
+                val.endTime = new Date(val.endTime).toISOString().split('T')[0]
+                $('.ptgoodsName').val(val.ptgoodsName)
+                $('.ptPrice').val(val.ptPrice)
+                $('.ptSize').val(val.ptSize)
+                $('.ptValidhours').val(val.ptValidhours)
+                $('.startTime').val(val.startTime)
+                $('.endTime').val(val.endTime)
+                $('.ptgoodsNumber').val(val.ptgoodsNumber)
+                $('.content').val(val.content)
+                $('.ptgoodsImgs').val(val.ptgoodsImgs)
+                $('.sort').val(val.sort)
+                $('.sale').val(val.sale)
+                $('.ptTimes').val(val.ptTimes)
+            },
+            yes: function (layero, index) {
+                var sub = {
+                    ptgoodsName: $('.ptgoodsName').val(),
+                    ptPrice: $('.ptPrice').val(),
+                    ptSize: $('.ptSize').val(),
+                    ptValidhours: $('.ptValidhours').val(),
+                    startTime: $('.startTime').val(),
+                    endTime: $('.endTime').val(),
+                    ptgoodsNumber: $('.ptgoodsNumber').val(),
+                    content: $('.content').val(),
+                    ptgoodsImgs: $('.ptgoodsImgs').val(),
+                    sort: $('.sort').val(),
+                    sale: $('.sale').val(),
+                    ptTimes: $('.ptTimes').val()
+                }
+                $.ajax({
+                    type: "PUT",
+                    contentType: "application/json",
+                    dataType: "JSON",
+                    headers: {
+                        'x-api-token': $.cookie('token')
+                    },
+                    data: JSON.stringify(sub),
+                    url: `${baseUrl}/goods/${val.ptgoodsId}`,
+                    success: function (response) {
+                        if (response.code == 200) {
+                            layer.closeAll();
+                            layer.msg('修改商品成功!');
+                            fund(1)
+                        } else {
+                            layer.msg(response.msg);
+                        }
+                    }
+                });
+            },
+        });
+    }
+
+
+    // 键盘回车按下事件
+    $('#searchPhone').on('keyup', function (e) {
+        if (event.keyCode == '13') {
+            fund(1)
+        }
+    })
+
+    //点击搜索图标事件
+    $('#searchIcon').click(function () {
+        fund(1)
+    })
+
+    // 输入框失去焦点事件
+    $('#searchPhone').blur(function () {
+        fund(1)
+    })
+</script>
+
+</html>

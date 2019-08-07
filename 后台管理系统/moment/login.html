@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("./static/img/login_bg.png");
+            background-size: cover;
+            position: relative;
+        }
+
+        .login-div {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        .login-div h1 {
+            margin: 10px auto;
+            font-weight: normal;
+        }
+
+        .login-div form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-div .login-form-item {
+            margin-bottom: 20px;
+        }
+
+        .login-div .login-form-item input {
+            width: 300px;
+            height: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 3px;
+            border: 1px solid #CCCCCC;
+        }
+
+        .login-div form .btn-login {
+            height: 40px;
+            width: 320px;
+            background-color: #009688;
+            border: none;
+            color: white;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-div">
+        <h1>登录</h1>
+        <form id="login-form" action="#">
+            <div class="login-form-item">
+                <input id="username" name="username" placeholder="用户名">
+            </div>
+            <div class="login-form-item">
+                <input id="password" name="password" type="password" placeholder="密码">
+            </div>
+            <button class="btn-login" type="submit">登录</button>
+        </form>
+    </div>
+</body>
+
+</html>
+<script src="./static/jquery-3.3.1.min.js"></script>
+<script src="./static/jquery.cookie.js"></script>
+<script src="./static/layui/layui.all.js"></script>
+<script>
+    layui.use(['layer' ], function () {
+        window.layer = layui.layer;
+    });
+    $('#login-form').submit(function () {
+        var aaa = {
+            app: $('#username').val(),
+            accountId: $('#username').val(),
+            password: $('#password').val()
+        }
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "http://47.112.119.60:83/login",
+            dataType: "JSON",
+            data: JSON.stringify(aaa),
+            success: function (response) {
+                if (response.code != 200) {
+                    layer.msg(response.msg)
+                    return
+                }
+                $.cookie('token', response.data.token);
+                $.cookie('username', $('#username').val());
+                location.href = "index.html";
+            }
+        });
+        return false
+    })
+</script>
