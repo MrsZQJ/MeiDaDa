@@ -2,7 +2,7 @@
     "navigationBarTitleText": "首页",
     "navigationStyle": "custom",
     "usingComponents": {
-        
+      "i-button": "../../../static/iview/button/index"
     }
   }
   

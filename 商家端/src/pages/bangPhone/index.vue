@@ -14,13 +14,20 @@
       <input class="ipt" type="number" placeholder="请输入验证码" />
       <button class="btn">获取验证码</button>
     </div>
-    <i-button bind:click="handleClick" type="primary" shape="circle" size="small">下一步</i-button>
+    <i-button @click="handleClick" type="primary" shape="circle" size="small">下一步</i-button>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {};
+  },
+  methods: {
+    handleClick() {
+      wx.navigateTo({
+        url: "/pages/resetPassword/main"
+      });
+    }
   }
 };
 </script>

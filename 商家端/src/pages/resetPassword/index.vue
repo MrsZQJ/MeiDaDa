@@ -16,7 +16,7 @@
       <input class="ipt" type="number" placeholder="请再次输入你的密码" />
     </div>
     <div class="bth"></div>
-    <i-button :click="handleClick()" type="primary" shape="circle" size="small">确认修改</i-button>
+    <i-button @click="handleClick" type="primary" shape="circle" size="small">确认修改</i-button>
   </div>
 </template>
 <script>
@@ -24,10 +24,12 @@ export default {
   data() {
     return {};
   },
-  methods:{
-      handleClick(){
-
-      }
+  methods: {
+    handleClick() {
+      wx.navigateTo({
+        url: "/pages/Login/main"
+      });
+    }
   }
 };
 </script>
@@ -38,8 +40,8 @@ export default {
   width: 100%;
   background-color: #f5f5f5;
 }
-#body{
-    background-color: #ffffff;
+#body {
+  background-color: #ffffff;
 }
 .title {
   height: 49px;
@@ -72,7 +74,7 @@ export default {
   font-size: 15px;
   color: #999999;
 }
-.bth{
-    height: 50px;
+.bth {
+  height: 50px;
 }
 </style>

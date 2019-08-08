@@ -10,27 +10,27 @@
           </navigator>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/fk_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/xs_icon@2x.png" alt />
           <span>限时秒杀</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/yq_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/kj_icon@2x.png" alt />
           <span>砍价</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/kt_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/bwk_icon@2x.png" alt />
           <span>霸王卡</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/ktct_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/bwk_icon@2x.png" alt />
           <span>小程序</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/fk_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/lm_icon@2x.png" alt />
           <span>异业联盟</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/yq_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/pt_yq_icon@2x.png" alt />
           <span>分享有礼</span>
         </div>
       </div>
@@ -39,35 +39,35 @@
       <p>发现精彩</p>
       <div class="boxDetail">
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/ktct_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/jx_icon@2x.png" alt />
           <span>话术大全</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/fk_icon@2x.png" alt />
-          <span>音频学习</span>
-        </div>
-        <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/yq_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/jx_icon@2x.png" alt />
           <span>教学视频</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/kt_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/yp_icon@2x.png" alt />
+          <span>音频学习</span>
+        </div>
+        <div>
+          <img src="../../../static/images/图标/图标/wa_icon@2x.png" alt />
           <span>文案素材</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/ktct_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/zx_icon@2x.png" alt />
           <span>咨询公司</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/fk_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/cp_icon@2x.png" alt />
           <span>产品公司</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/yq_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/yq_icon@2x.png" alt />
           <span>仪器产家</span>
         </div>
         <div>
-          <img src="../../../static/images/小程序美达达图标/拼团详情/kt_icon@2x.png" alt />
+          <img src="../../../static/images/图标/图标/gd_icon@2x.png" alt />
           <span>更多</span>
         </div>
       </div>

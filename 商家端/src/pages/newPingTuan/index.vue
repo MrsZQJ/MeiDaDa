@@ -30,14 +30,14 @@
     <div class="border1px"></div>
     <div class="border1px"></div>
     <div class="imgJia">
-      <img src="../../../static/images/小程序美达达图标/新建拼团/xj_icon@2x.png" alt />
+      <img src="../../../static/images/图标/图标/xj_icon@2x.png" alt />
     </div>
     <div class="clear"></div>
     <div class="fuwuDetail">
       <p>服务详情</p>
       <textarea placeholder="请输入服务详情"></textarea>
       <div class="fuwuImg">
-        <img src="../../../static/images/小程序美达达图标/新建拼团/xj_icon@2x.png" alt />
+        <img src="../../../static/images/图标/图标/xj_icon@2x.png" alt />
       </div>
     </div>
     <div class="clear"></div>
