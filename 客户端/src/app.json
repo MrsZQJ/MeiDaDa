@@ -1,9 +1,8 @@
 {
   "pages": [
-    "pages/PersonalCenter/main",
     "pages/groupDetail/main",
+    "pages/PersonalCenter/main",
     "pages/paySuccess/main",
-
     "pages/pay/main",
     "pages/groupList/main"
   ],

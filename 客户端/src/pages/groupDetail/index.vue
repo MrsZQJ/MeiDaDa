@@ -103,24 +103,24 @@ export default {
   data() {
     return {
       swipers: [
-        {
-          image_src: "https://www.zhengzhicheng.cn/pyg/banner1.png",
-          open_type: "navigate",
-          goods_id: 129,
-          navigator_url: "/pages/goods_detail/main?goods_id=129"
-        },
-        {
-          image_src: "https://www.zhengzhicheng.cn/pyg/banner2.png",
-          open_type: "navigate",
-          goods_id: 395,
-          navigator_url: "/pages/goods_detail/main?goods_id=395"
-        },
-        {
-          image_src: "https://www.zhengzhicheng.cn/pyg/banner3.png",
-          open_type: "navigate",
-          goods_id: 38,
-          navigator_url: "/pages/goods_detail/main?goods_id=38"
-        }
+        // {
+        //   image_src: "https://www.zhengzhicheng.cn/pyg/banner1.png",
+        //   open_type: "navigate",
+        //   goods_id: 129,
+        //   navigator_url: "/pages/goods_detail/main?goods_id=129"
+        // },
+        // {
+        //   image_src: "https://www.zhengzhicheng.cn/pyg/banner2.png",
+        //   open_type: "navigate",
+        //   goods_id: 395,
+        //   navigator_url: "/pages/goods_detail/main?goods_id=395"
+        // },
+        // {
+        //   image_src: "https://www.zhengzhicheng.cn/pyg/banner3.png",
+        //   open_type: "navigate",
+        //   goods_id: 38,
+        //   navigator_url: "/pages/goods_detail/main?goods_id=38"
+        // }
       ],
       visible1: false,
       actions1: [
@@ -132,27 +132,37 @@ export default {
           name: "添加到我的小程序"
         }
       ],
-      addXiao: false
+      addXiao: false,
+      code: NaN
     };
   },
   created() {
-    this.getSwiper();
+    this.getLogin();
   },
   methods: {
-    getSwiper() {
-      wx.login({
-        success(res) {
-          if (res.code) {
-            
-          } else {
-            console.log("登录失败！" + res.errMsg);
-          }
+    getLogin() {
+      wx.checkSession({
+        success() {
+          //session_key 未过期，并且在本生命周期一直有效
+        },
+        fail() {
+          // session_key 已经失效，需要重新执行登录流程
+          wx.login({
+            success: res => {
+              if (res.code) {
+                this.$axios
+                  .post("routine/logins/setCode", {
+                    "info[code]": "043QdsyS1COd1613IkxS1cTgyS1QdsyE"
+                  })
+                  .then(function(response) {
+                    console.log(response);
+                  });
+              } else {
+                console.log(res.errMsg);
+              }
+            }
+          });
         }
-      });
-    },
-    qingqiu() {
-      this.$axios.get(`goods/goodslist?goods_ids=${45}`).then(res => {
-        console.log(res);
       });
     },
     handleOpen1() {
@@ -209,7 +219,7 @@ export default {
 }
 swiper {
   width: 750rpx;
-  height: 252rpx;
+  height: 126px;
 }
 swiper image {
   width: 100%;

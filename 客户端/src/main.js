@@ -6,7 +6,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://api.pt.com'
+axios.defaults.baseURL = 'https://meifuyihao.com/index.php/'
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -16,9 +16,9 @@ axios.interceptors.request.use(function (config) {
     mask: true //显示透明蒙层，防止触摸穿透,
   });
   // 拦截器的好处之一，可以在这里面统一做一些请求发送出去之前的事情
-  if (wx.getStorageSync('token')) {
-    config.headers.Authorization = wx.getStorageSync('token')
-  }
+  // if (wx.getStorageSync('token')) {
+  //   config.headers.Authorization = wx.getStorageSync('token')
+  // }
   return config;
 }, function (error) {
   // 对请求错误做些什么
