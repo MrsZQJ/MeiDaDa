@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "",
+    "navigationStyle": "custom",
+    "usingComponents": {
+      "i-button": "../../../static/iview/button/index"
+    }
+  }
+  

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/authorization/main",
     "pages/groupDetail/main",
     "pages/PersonalCenter/main",
     "pages/paySuccess/main",

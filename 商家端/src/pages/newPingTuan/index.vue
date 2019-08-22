@@ -30,7 +30,7 @@
     <div class="border1px"></div>
     <div class="border1px"></div>
     <div class="imgJia">
-      <img src="../../../static/images/图标/图标/xj_icon@2x.png" alt />
+      <img @click="pingtuanTop" src="../../../static/images/图标/图标/xj_icon@2x.png" alt />
     </div>
     <div class="clear"></div>
     <div class="fuwuDetail">
@@ -78,11 +78,11 @@
 export default {
   data() {
     return {
-      cantuanxuzhi:"",
+      cantuanxuzhi: "",
       namePingTuan: "",
-      nameNalue:"",
-      ipNalue:"",
-      telNalue:"",
+      nameNalue: "",
+      ipNalue: "",
+      telNalue: "",
       minDate1: new Date().getTime(),
       maxDate: new Date(2019, 10, 1).getTime(),
       currentDate1: new Date().getTime(), //用户选择的起始时间
@@ -104,7 +104,7 @@ export default {
     closeTimeChange() {
       this.showStartTime = false;
     },
-    closeTimeChange2(){
+    closeTimeChange2() {
       this.showEndTime = false;
     },
     // 更新用户开始时间选择
@@ -130,15 +130,29 @@ export default {
     // 开启结束时间选择框
     endTime() {
       this.showEndTime = true;
+    },
+    // 添加拼团页面顶部图
+    pingtuanTop() {
+      let that = this;
+      this.$axios
+        .post(`/api/miniprogram/oss/sign`, { module: module })
+        .then(res => {
+          if (res.code === 0) {
+            // 获取签名
+            that.sign = res.data;
+          } else {
+            console.log(res.msg);
+          }
+        })
+        .catch(err => {
+          console.log(err.status, err.message);
+        });
     }
   }
 };
 </script>
 
 <style scoped>
- 
-  
-   
 .changeTime {
   width: 375px;
   height: 49px;
@@ -250,17 +264,16 @@ export default {
   height: 58px;
   margin: 5px;
 }
-.last{
+.last {
   display: block;
   width: 329px;
   height: 42px;
-  background-color: #2287FF;
+  background-color: #2287ff;
   border-radius: 66px;
   margin: 39px auto;
   margin-bottom: 30px;
-  color:#FEFEFE;
+  color: #fefefe;
   text-align: center;
   line-height: 42px;
-  
 }
 </style>
